@@ -1,16 +1,13 @@
 import "dotenv/config";
-import app from "./app.js";
-import { connectDB } from "./config/db.js";
-import { seedAdmins } from "./utils/seedAdmins.js";
-import { verifyMailer } from "./utils/mailer.js";
+import app from "../src/app.js";
+import { connectDB } from "../src/config/db.js";
 
-const PORT = process.env.PORT || 4000;
+let isConnected = false;
 
-await connectDB();
-await seedAdmins();
-await verifyMailer();
-
-app.listen(PORT, () => {
-  console.log(`🚀 API running on http://localhost:${PORT}`);
-});
- 
+export default async function handler(req, res) {
+  if (!isConnected) {
+    await connectDB();
+    isConnected = true;
+  }
+  return app(req, res);
+}
