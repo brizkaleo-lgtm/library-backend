@@ -2,10 +2,10 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 
-import authRoutes from "./routes/auth.routes.js";
-import userRoutes from "./routes/users.routes.js";
-import documentRoutes from "./routes/documents.routes.js";
-import { notFound, errorHandler } from "./middleware/errorHandler.js";
+import authRoutes from "./src/routes/auth.routes.js";
+import userRoutes from "./src/routes/users.routes.js";
+import documentRoutes from "./src/routes/documents.routes.js";
+import { notFound, errorHandler } from "./src/middleware/errorHandler.js";
 
 const app = express();
 
