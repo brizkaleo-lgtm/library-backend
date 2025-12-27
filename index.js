@@ -1,12 +1,12 @@
+import dotenv from "dotenv";
+dotenv.config();
 import app from "./app.js";
 import { connectDB } from "./src/config/db.js";
 
-let isConnected = false;
+const PORT = process.env.PORT || 4000;
 
-export default async function handler(req, res) {
-  if (!isConnected) {
-    await connectDB();
-    isConnected = true;
-  }
-  return app(req, res);
-}
+connectDB();
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
